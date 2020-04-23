@@ -52,9 +52,6 @@ public class SimpleCalculator {
     }
 
     public static void main(String[] args) {
-        System.out.println("Фибоначчи от 5:" + Fibonacchi.fibonacchi(5));
-        System.out.println("1,5 в 3 степени:" + Power.power(1.5, 3));
-        System.out.println("Факториал числа 6:" + Factorial.factorial(6));
         double num1 = getDouble();
         double num2 = getDouble();
         char operation = getOperation();

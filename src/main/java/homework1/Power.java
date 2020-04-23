@@ -4,10 +4,10 @@ class Power {
 
     // возведение в степень
     public static double power(double a, int b) {
-        if (b == 1)
-            return a;
-        else {
-            return (a * power(a, b - 1));
+        double result = 1;
+        for (int i=1; i<=b; i++){
+            result = result*a;
         }
+        return result;
     }
 }
