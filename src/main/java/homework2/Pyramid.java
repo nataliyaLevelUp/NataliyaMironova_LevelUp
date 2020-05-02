@@ -1,13 +1,9 @@
 package homework2;
 
-class Pyramid implements Figure {
-
-    private double height;
-    private double s; // площадь основания
+class Pyramid extends Polyhedron {
 
     public Pyramid(double height, double s) {
-        this.height = height;
-        this.s = s;
+        super(height, s);
     }
 
     @Override

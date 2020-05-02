@@ -15,9 +15,17 @@ public class SimpleAbstraction {
         Cylinder cylyinder = new Cylinder(2, 2);
         Konus konus = new Konus(50,10);
         Pyramid pyramid = new Pyramid(100, 100);
+        Cube cube = new Cube(6.0);
+        Prism prism = new Prism(3.4,12);
+        Parallelepiped pal = new Parallelepiped(4.6, 12);
         System.out.println("Объем шара: "+f.format(ball.getVolume()));
         System.out.println("Объем цилиндра: "+f.format(cylyinder.getVolume()));
         System.out.println("Объем конуса: "+f.format(konus.getVolume()));
         System.out.println("Объем пирамиды:" +f.format(pyramid.getVolume()));
+        System.out.println("Объем призмы:" +f.format(prism.getVolume()));
+        System.out.println("Объем куба:" +f.format(cube.getVolume()));
+        System.out.println("Объем параллелепипеда:" +f.format(pal.getVolume()));
     }
+
 }
+
