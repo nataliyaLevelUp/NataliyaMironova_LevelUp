@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite General">
+    <suite-files>
+        <suite-file path="SumSuite.xml"></suite-file>
+        <suite-file path="Sub.Suite.xml"></suite-file>
+        <suite-file path="MultSuite.xml"></suite-file>
+        <suite-file path="DivSuite.xml"></suite-file>
+        <suite-file path="PowSuite.xml"></suite-file>
+        <suite-file path="SqrtSuite.xml"></suite-file>
+        <suite-file path="TrigSuite.xml"></suite-file>
+    </suite-files>
+</suite>
