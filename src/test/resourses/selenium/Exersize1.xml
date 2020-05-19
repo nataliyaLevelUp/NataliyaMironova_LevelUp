@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Exersize1 Suite">
+    <test name="Exersize1 Test" >
+        <classes>
+            <class name="homework4.exersize1.MailLocatorsTestForExersize1" />
+        </classes>
+    </test>
+</suite>
