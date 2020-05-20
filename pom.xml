@@ -32,5 +32,12 @@
             <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.epam.tat.module4.Calculator</groupId>
+            <artifactId>calculator-jar</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/NaMironova/Downloads/calculator-1.0.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
