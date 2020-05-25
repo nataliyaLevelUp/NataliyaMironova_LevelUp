@@ -1,6 +1,6 @@
-package lesson.unit.tests;
+package homework_3;
 
-import lesson.unit.tests.dataProvider.SqrtDataProvider;
+import homework_3.dataProvider.SqrtDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

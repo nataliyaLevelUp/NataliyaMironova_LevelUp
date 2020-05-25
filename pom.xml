@@ -21,14 +21,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
             </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <fork>true</fork>
-                    <executable>C:\Program Files\Java\jdk1.8.0_241\bin\javac.exe</executable>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <version>1.0-SNAPSHOT</version>
@@ -43,9 +35,9 @@
         <dependency>
             <groupId>com.epam.tat.module4.Calculator</groupId>
             <artifactId>calculator-jar</artifactId>
-            <version>1.0.0</version>
+            <version>1.0</version>
             <scope>system</scope>
-            <systemPath>C:/Users/NaMironova/Downloads/calculator-1.0.jar</systemPath>
+            <systemPath>${basedir}/calculator-1.0.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

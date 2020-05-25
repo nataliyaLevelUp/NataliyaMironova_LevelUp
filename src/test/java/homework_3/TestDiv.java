@@ -1,6 +1,6 @@
-package lesson.unit.tests;
+package homework_3;
 
-import lesson.unit.tests.dataProvider.DivDataProvider;
+import homework_3.dataProvider.DivDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

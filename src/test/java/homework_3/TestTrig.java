@@ -1,6 +1,6 @@
-package lesson.unit.tests;
+package homework_3;
 
-import lesson.unit.tests.dataProvider.TrigDataProvider;
+import homework_3.dataProvider.TrigDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

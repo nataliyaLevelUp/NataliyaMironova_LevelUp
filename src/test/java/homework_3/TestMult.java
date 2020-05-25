@@ -1,6 +1,6 @@
-package lesson.unit.tests;
+package homework_3;
 
-import lesson.unit.tests.dataProvider.MultDataProvider;
+import homework_3.dataProvider.MultDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,7 +11,7 @@ public class TestMult extends AbstractBaseTest {
     @Test(dataProviderClass = MultDataProvider.class, dataProvider = "Mult Positive Long Data Provider")
     public void testMultPositiveLong(long a, long b, long expected) {
         System.out.println("Test testMultPositiveLong: "+ a + "*" + b + "=" + expected );
-        Assert.assertEquals(calculator.mult(a,b),expected);
+        assertEquals(calculator.mult(a,b),expected);
     }
 
     @Test(dataProviderClass = MultDataProvider.class, dataProvider = "Mult Negative Long Data Provider")
@@ -23,7 +23,7 @@ public class TestMult extends AbstractBaseTest {
     @Test(dataProviderClass = MultDataProvider.class, dataProvider = "Mult Positive Double Data Provider")
     public void testMultPositiveDouble(double a, double b, double expected) {
         System.out.println("Test testMultPositiveDouble: "+ a + "*" + b + "=" + expected );
-        Assert.assertEquals(calculator.mult(a,b), expected);
+        assertEquals(calculator.mult(a,b), expected);
     }
 
     @Test(dataProviderClass = MultDataProvider.class, dataProvider = "Mult Negative Double Data Provider")

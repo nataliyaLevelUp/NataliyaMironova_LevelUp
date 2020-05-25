@@ -1,6 +1,6 @@
-package lesson.unit.tests;
+package homework_3;
 
-import lesson.unit.tests.dataProvider.SumDataProvider;
+import homework_3.dataProvider.SumDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

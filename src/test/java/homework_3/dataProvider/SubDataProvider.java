@@ -1,6 +1,6 @@
-package lesson.unit.tests.dataProvider;
+package homework_3.dataProvider;
 
-import lesson.unit.tests.AbstractBaseTest;
+import homework_3.AbstractBaseTest;
 import org.testng.annotations.DataProvider;
 
 public class SubDataProvider extends AbstractBaseTest {
