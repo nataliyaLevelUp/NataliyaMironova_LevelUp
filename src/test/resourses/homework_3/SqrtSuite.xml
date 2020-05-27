@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Sqrt Suite">
+    <test name="Sqrt Test" >
+        <classes>
+            <class name="homework_3.TestSqrt" />
+        </classes>
+    </test>
+</suite>
