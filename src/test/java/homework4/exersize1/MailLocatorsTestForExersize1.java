@@ -13,34 +13,65 @@ import static org.testng.Assert.assertEquals;
 
 public class MailLocatorsTestForExersize1 extends BaseTest  {
 
+    WebElement mailAddress, mailTheme, mailBody, saveLetter, closeLetter, draftsFolder, draftLetter, sendLetterFolder;
+
+    String assertTitle, assertBody;
+
     @Test
-    public void mailTest() throws InterruptedException {
+    public void mailTest()  {
+
+        // логин в почтовый ящик
         driver.findElement(By.id("mailbox:login")).sendKeys("level.up.2020");
         driver.findElement(By.xpath("//*[@id=\"mailbox:submit\"]/input")).click();
         driver.findElement(By.id("mailbox:password")).sendKeys("MeaORPfit(33");
         driver.findElement(By.xpath("//*[@id=\"mailbox:submit\"]")).click();
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"));
         assertEquals(driver.getTitle(), "Входящие - Почта Mail.ru");
-        driver.findElement(By.linkText("Написать письмо")).click();
-        WebDriverWait waitForOne = new WebDriverWait(driver, 10);
-        waitForOne.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[2]/div/div/div[1]/div/div[2]/div/div/label/div/div/input")));
-        driver.findElement(By.xpath("/html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[2]/div/div/div[1]/div/div[2]/div/div/label/div/div/input")).sendKeys("n6937@yandex.ru");
-        driver.findElement(By.xpath("/html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[3]/div[1]/div[2]/div/input")).sendKeys("Тема письма");
-        driver.findElement(By.xpath("/html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[5]/div/div/div[2]/div[1]/div[1]")).sendKeys("Тело письма");
-        driver.findElement(By.xpath("/html/body/div[15]/div[2]/div/div[2]/div[1]/span[2]/span/span")).click();
-        driver.findElement(By.xpath("//button[@title='Закрыть']")).click();
-        driver.findElement(By.linkText("Черновики")).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='n6937@yandex.ru']")));
-        driver.findElement(By.xpath("//*[text()='n6937@yandex.ru']")).click();
+
+        // создание нового письма
+        driver.findElement(By.cssSelector("[title = 'Написать письмо']")).click();
+
+        mailAddress = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-type='to'] input")));
+        mailAddress.sendKeys("n6937@yandex.ru");
+        mailTheme = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='Subject']")));
+        mailTheme.sendKeys("Тема письма");
+        mailBody = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[role='textbox'")));
+        mailBody.sendKeys();
+
+
+        // сохранение в черновиках
+        saveLetter = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title='Сохранить']")));
+        saveLetter.click();
+
+        // закрываем окно письма
+
+        closeLetter = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='button'][title='Закрыть']")));
+        closeLetter.click();
+
+        // Переходим в папку черновики
+
+        draftsFolder = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Черновики")));
+        draftsFolder.click();
+
+        // проверка сохранённого письма
+
+        wait.until(ExpectedConditions.titleIs("Черновики - Почта Mail.ru"));
+
+        draftLetter = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='n6937@yandex.ru']")));
+        draftLetter.click();
+
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Тема письма']")));
-        String assertTitle = driver.findElement(By.xpath("//*[text()='Тема письма']")).getText();
-        String assertBody = driver.findElement(By.xpath("//*[text()='Тело письма']")).getText();
+        assertTitle = driver.findElement(By.xpath("//*[text()='Тема письма']")).getText();
+        assertBody = driver.findElement(By.xpath("//*[text()='Тело письма']")).getText();
         assertEquals(assertTitle, "Тема письма");
         assertEquals(assertBody, "Тело письма");
+
+        // отправка письма и переход в папку Отправленные
         driver.findElement(By.xpath("//*[text()='Отправить']")).click();
-        WebDriverWait waitForTwo = new WebDriverWait(driver, 30);
-        driver.findElement(By.xpath("//*[text()='Отправленные']")).click();
+
+        sendLetterFolder = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/*[text()='Отправленные']")));
+        sendLetterFolder.click();
         driver.findElement(By.id("PH_logoutLink")).click();
     }
 }
