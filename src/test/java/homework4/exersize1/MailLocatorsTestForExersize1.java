@@ -1,5 +1,6 @@
 package homework4.exersize1;
 
+import homework4.BaseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,21 +12,23 @@ import org.testng.annotations.*;
 
 import static org.testng.Assert.assertEquals;
 
-public class MailLocatorsTestForExersize1 extends BaseTest  {
+public class MailLocatorsTestForExersize1 extends BaseTest {
 
-    WebElement mailAddress, mailTheme, mailBody, saveLetter, closeLetter, draftsFolder, draftLetter, sendLetterFolder;
-
-    String assertTitle, assertBody;
 
     @Test
     public void mailTest()  {
 
         // логин в почтовый ящик
-        driver.findElement(By.id("mailbox:login")).sendKeys("level.up.2020");
-        driver.findElement(By.xpath("//*[@id=\"mailbox:submit\"]/input")).click();
-        driver.findElement(By.id("mailbox:password")).sendKeys("MeaORPfit(33");
-        driver.findElement(By.xpath("//*[@id=\"mailbox:submit\"]")).click();
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+
+        login = wait.until(ExpectedConditions.elementToBeClickable(By.id("mailbox:login")));
+        login.sendKeys(LOGIN);
+        passwordButton = driver.findElement(By.id("mailbox:submit"));
+        passwordButton.click();
+        password = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#mailbox [placeholder='Пароль']")));
+        password.sendKeys(PASSWORD);
+        submitButton = driver.findElement(By.cssSelector("#mailbox [type='submit']"));
+        submitButton.click();
+
         wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"));
         assertEquals(driver.getTitle(), "Входящие - Почта Mail.ru");
 
@@ -33,11 +36,11 @@ public class MailLocatorsTestForExersize1 extends BaseTest  {
         driver.findElement(By.cssSelector("[title = 'Написать письмо']")).click();
 
         mailAddress = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-type='to'] input")));
-        mailAddress.sendKeys("n6937@yandex.ru");
+        mailAddress.sendKeys(PERSONAL_ADDRESS);
         mailTheme = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='Subject']")));
-        mailTheme.sendKeys("Тема письма");
+        mailTheme.sendKeys(MAIL_THEME);
         mailBody = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[role='textbox'")));
-        mailBody.sendKeys();
+        mailBody.sendKeys(MAIL_BODY);
 
 
         // сохранение в черновиках
@@ -68,10 +71,14 @@ public class MailLocatorsTestForExersize1 extends BaseTest  {
         assertEquals(assertBody, "Тело письма");
 
         // отправка письма и переход в папку Отправленные
-        driver.findElement(By.xpath("//*[text()='Отправить']")).click();
+
+        sendButtonLetter = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Отправить']")));
+        sendButtonLetter.click();
 
         sendLetterFolder = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/*[text()='Отправленные']")));
         sendLetterFolder.click();
-        driver.findElement(By.id("PH_logoutLink")).click();
+
+        logout = wait.until(ExpectedConditions.elementToBeClickable(By.id("PH_logoutLink")));
+        logout.click();
     }
 }

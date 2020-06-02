@@ -1,4 +1,4 @@
-package homework4.exersize1;
+package homework_5;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -8,11 +8,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-public abstract class BaseTest {
+public class AbstractSeleniumBaseTest {
 
     public WebDriver driver;
-    public WebDriverWait wait;
-
+    WebDriverWait wait;
 
     @BeforeClass
     public void beforeClass() {
@@ -23,12 +22,11 @@ public abstract class BaseTest {
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://mail.ru/");
+
     }
 
     @AfterMethod
     public void tearDown() {
         driver.quit();
     }
-
 }
