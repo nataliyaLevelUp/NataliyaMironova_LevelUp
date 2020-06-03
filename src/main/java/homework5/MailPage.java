@@ -5,33 +5,35 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class MailPage {
-
-    public WebDriver driver;
+public class MailPage extends BasePage {
 
     public MailPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
+    public String expectedTitle;
+
 
     @FindBy(id = "mailbox:login")
     public WebElement user;
 
-    @FindBy(xpath = "//*[@id='mailbox:submit']/input")
+    @FindBy(css = "#mailbox [type='submit']")
     public WebElement buttonForPassword;
 
     @FindBy(id = "mailbox:password")
     public WebElement password;
 
-    @FindBy(xpath = "//*[@id='mailbox:submit']")
+    @FindBy(css = "#mailbox [type='submit']")
     public WebElement buttonSubmit;
 
     public  MailPage login(String name, String password) {
+
         user.sendKeys(name);
         buttonForPassword.click();
         this.password.sendKeys(password);
@@ -39,37 +41,44 @@ public class MailPage {
         return this;
     }
 
-    public String expectedTitle = driver.getTitle();
-
     public  MailPage expectedTitle(String str) {
+        wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"));
         expectedTitle = driver.getTitle();
+        assertEquals(expectedTitle, "Входящие - Почта Mail.ru");
         return this;
     }
 
     @FindBy(linkText = "Написать письмо")
     public WebElement writeLetter;
 
-    @FindBy(xpath = "html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[2]/div/div/div[1]/div/div[2]/div/div/label/div/div/input")
+    @FindBy(css = "[data-type='to'] input")
     public WebElement address;
 
-    @FindBy(xpath = "/html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[3]/div[1]/div[2]/div/input")
+    @FindBy(css = "input[name='Subject']")
     public WebElement theme;
 
-    @FindBy(xpath = "/html/body/div[15]/div[2]/div/div[1]/div[2]/div[3]/div[5]/div/div/div[2]/div[1]/div[1]")
+    @FindBy(css = "input[role='textbox'")
     public WebElement body;
 
-    @FindBy(xpath = "/html/body/div[15]/div[2]/div/div[2]/div[1]/span[2]/span/span")
+    @FindBy(css = "[title='Сохранить']")
     public WebElement saveLetter;
 
     @FindBy(xpath = "//button[@title='Закрыть']")
     public WebElement closeLetter;
 
     public MailPage createAndSaveLetter(String emailAddress, String themeLetter, String bodyLetter) {
+
+        wait.until(ExpectedConditions.elementToBeClickable(writeLetter));
         writeLetter.click();
+        wait.until(ExpectedConditions.visibilityOf(address));
         address.sendKeys(emailAddress);
+        wait.until(ExpectedConditions.visibilityOf(theme));
         theme.sendKeys(themeLetter);
+        wait.until(ExpectedConditions.visibilityOf(body));
         body.sendKeys(bodyLetter);
+        wait.until(ExpectedConditions.elementToBeClickable(saveLetter));
         saveLetter.click();
+        wait.until(ExpectedConditions.elementToBeClickable(closeLetter));
         closeLetter.click();
         return this;
     }
@@ -83,9 +92,8 @@ public class MailPage {
     public WebElement beforeCreatedLetter;
 
     @FindBy(xpath = "//*[text()='Тема письма']")
-    public WebElement assertTitle;
+    public String assertTitle;
 
-    public String asserttitle = assertTitle.getText();
 
     @FindBy(xpath = "/*[text()='Тело письма']")
     public WebElement assertBody;
@@ -97,10 +105,14 @@ public class MailPage {
     public WebElement lettersWasSentFolder;
 
     public MailPage checkLetterInDrafts(String themeOfLetter, String bodyOfLetter) {
+
+        wait.until(ExpectedConditions.elementToBeClickable(drafts));
         drafts.click();
+        wait.until(ExpectedConditions.elementToBeClickable(beforeCreatedLetter));
         beforeCreatedLetter.click();
         assertEquals(assertTitle, themeOfLetter);
         assertEquals(assertBody, bodyOfLetter);
+        wait.until(ExpectedConditions.elementToBeClickable(sendLetter));
         sendLetter.click();
         lettersWasSentFolder.click();
         return this;
@@ -110,6 +122,7 @@ public class MailPage {
     public WebElement logout;
 
     public MailPage logout() {
+        wait.until(ExpectedConditions.elementToBeClickable(logout));
         logout.click();
         return this;
     }

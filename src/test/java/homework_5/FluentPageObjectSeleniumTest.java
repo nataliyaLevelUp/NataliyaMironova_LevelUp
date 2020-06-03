@@ -13,8 +13,7 @@ public class FluentPageObjectSeleniumTest extends AbstractSeleniumBaseTest {
 
     @Test
     public void mailSuccessTest() {
-        driver.get("https://mail.ru/");
-        MailPage mailPage = new MailPage(driver);
+
         mailPage.login("level.up.2020", "MeaORPfit(33");
         assertThat(mailPage.expectedTitle, equals(wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"))));
         mailPage.createAndSaveLetter("n6937@yandex.ru", "Тема письма", "Тело письма");
