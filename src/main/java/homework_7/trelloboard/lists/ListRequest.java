@@ -1,8 +1,14 @@
 package homework_7.trelloboard.lists;
 
+import lombok.Getter;
+
 public class ListRequest {
 
+
+    @Getter
     private String name;
+
+    @Getter
     private String idBoard;
 
 
@@ -11,13 +17,7 @@ public class ListRequest {
         this.idBoard = idBoard;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public String getIdBoard() {
-        return idBoard;
-    }
 
     @Override
     public String toString() {

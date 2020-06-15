@@ -2,36 +2,24 @@ package homework_7.trelloboard.lists;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ListResponse {
 
+    @Getter
     private String id;
+
+    @Getter
     private String name;
+
+    @Getter
     private String idBoard;
+
+    @Getter
     private Integer pos;
 
     public ListResponse() {
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public String getIdBoard() {
-        return idBoard;
-    }
-
-
-    public Integer getPos() {
-        return pos;
     }
 
 

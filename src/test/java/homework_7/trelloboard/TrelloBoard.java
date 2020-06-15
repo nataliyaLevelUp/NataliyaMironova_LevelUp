@@ -6,7 +6,6 @@ import homework_7.trelloboard.cards.CardRequest;
 import homework_7.trelloboard.cards.CardResponse;
 import homework_7.trelloboard.lists.ListRequest;
 import homework_7.trelloboard.lists.ListResponse;
-import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
