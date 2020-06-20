@@ -53,12 +53,11 @@ public class TrelloBoard extends TrelloApiBaseTest {
                 .body()
                 .as(ListResponse.class);
 
-        //System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listResponse));
         output(listResponse);
     }
 
     @Test
-    public void createCardTest() {
+    public void createCardTest() throws Exception {
         CardRequest cardRequest = new CardRequest("TestCard11","TestCard for TestList", "5ee5093ae3806d60ae29385c", "5edf37648f501a0bca3c0f8c");
         CardResponse cardResponse = given()
                 .body(cardRequest)
@@ -69,6 +68,8 @@ public class TrelloBoard extends TrelloApiBaseTest {
                 .extract()
                 .body()
                 .as(CardResponse.class);
+
+        output(cardResponse);
     }
 
 }
