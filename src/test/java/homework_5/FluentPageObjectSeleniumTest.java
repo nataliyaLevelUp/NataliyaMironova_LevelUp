@@ -16,7 +16,8 @@ public class FluentPageObjectSeleniumTest extends AbstractSeleniumBaseTest {
 
         mailPage.login("level.up.2020", "MeaORPfit(33");
         assertThat(mailPage.expectedTitle, equals(wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"))));
-        mailPage.createAndSaveLetter("n6937@yandex.ru", "Тема письма", "Тело письма");
+        mailPage.createLetter("n6937@yandex.ru", "Тема письма", "Тело письма");
+        mailPage.saveLetterClick();
         mailPage.checkLetterInDrafts("Тема письма", "Тело письма");
         mailPage.logout();
     }

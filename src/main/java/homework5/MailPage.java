@@ -19,7 +19,6 @@ public class MailPage extends BasePage {
 
     public String expectedTitle;
 
-
     @FindBy(id = "mailbox:login")
     public WebElement user;
 
@@ -31,22 +30,6 @@ public class MailPage extends BasePage {
 
     @FindBy(css = "#mailbox [type='submit']")
     public WebElement buttonSubmit;
-
-    public  MailPage login(String name, String password) {
-
-        user.sendKeys(name);
-        buttonForPassword.click();
-        this.password.sendKeys(password);
-        buttonSubmit.click();
-        return this;
-    }
-
-    public  MailPage expectedTitle(String str) {
-        wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"));
-        expectedTitle = driver.getTitle();
-        assertEquals(expectedTitle, "Входящие - Почта Mail.ru");
-        return this;
-    }
 
     @FindBy(linkText = "Написать письмо")
     public WebElement writeLetter;
@@ -65,25 +48,6 @@ public class MailPage extends BasePage {
 
     @FindBy(xpath = "//button[@title='Закрыть']")
     public WebElement closeLetter;
-
-    public MailPage createAndSaveLetter(String emailAddress, String themeLetter, String bodyLetter) {
-
-        wait.until(ExpectedConditions.elementToBeClickable(writeLetter));
-        writeLetter.click();
-        wait.until(ExpectedConditions.visibilityOf(address));
-        address.sendKeys(emailAddress);
-        wait.until(ExpectedConditions.visibilityOf(theme));
-        theme.sendKeys(themeLetter);
-        wait.until(ExpectedConditions.visibilityOf(body));
-        body.sendKeys(bodyLetter);
-        wait.until(ExpectedConditions.elementToBeClickable(saveLetter));
-        saveLetter.click();
-        wait.until(ExpectedConditions.elementToBeClickable(closeLetter));
-        closeLetter.click();
-        return this;
-    }
-
-    // Отправка письма из черновика
 
     @FindBy(linkText = "Черновики")
     public WebElement drafts;
@@ -104,6 +68,60 @@ public class MailPage extends BasePage {
     @FindBy(xpath = "/*[text()='Отправленные']")
     public WebElement lettersWasSentFolder;
 
+    @FindBy(id = "PH_logoutLink")
+    public WebElement logout;
+
+
+    public  MailPage login(String name, String password) {
+
+        user.sendKeys(name);
+        buttonForPassword.click();
+        this.password.sendKeys(password);
+        buttonSubmit.click();
+        return this;
+    }
+
+    public  MailPage expectedTitle(String str) {
+        wait.until(ExpectedConditions.titleIs("Входящие - Почта Mail.ru"));
+        expectedTitle = driver.getTitle();
+        assertEquals(expectedTitle, "Входящие - Почта Mail.ru");
+        return this;
+    }
+
+    public MailPage createLetter(String emailAddress, String themeLetter, String bodyLetter) {
+
+        wait.until(ExpectedConditions.elementToBeClickable(writeLetter));
+        writeLetter.click();
+        wait.until(ExpectedConditions.visibilityOf(address));
+        address.sendKeys(emailAddress);
+        wait.until(ExpectedConditions.visibilityOf(theme));
+        theme.sendKeys(themeLetter);
+        wait.until(ExpectedConditions.visibilityOf(body));
+        body.sendKeys(bodyLetter);
+        return this;
+    }
+
+    public void saveLetterClick() {
+        saveLetter.click();
+    }
+
+    public MailPage createAndSaveLetter(String emailAddress, String themeLetter, String bodyLetter) {
+
+        wait.until(ExpectedConditions.elementToBeClickable(writeLetter));
+        writeLetter.click();
+        wait.until(ExpectedConditions.visibilityOf(address));
+        address.sendKeys(emailAddress);
+        wait.until(ExpectedConditions.visibilityOf(theme));
+        theme.sendKeys(themeLetter);
+        wait.until(ExpectedConditions.visibilityOf(body));
+        body.sendKeys(bodyLetter);
+        wait.until(ExpectedConditions.elementToBeClickable(saveLetter));
+        saveLetter.click();
+        wait.until(ExpectedConditions.elementToBeClickable(closeLetter));
+        closeLetter.click();
+        return this;
+    }
+
     public MailPage checkLetterInDrafts(String themeOfLetter, String bodyOfLetter) {
 
         wait.until(ExpectedConditions.elementToBeClickable(drafts));
@@ -117,9 +135,6 @@ public class MailPage extends BasePage {
         lettersWasSentFolder.click();
         return this;
     }
-
-    @FindBy(id = "PH_logoutLink")
-    public WebElement logout;
 
     public MailPage logout() {
         wait.until(ExpectedConditions.elementToBeClickable(logout));
