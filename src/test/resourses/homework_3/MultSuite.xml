@@ -3,7 +3,7 @@
 <suite name="Mult Suite">
     <test name="Mult Test" >
         <classes>
-            <class name="lesson.unit.tests.TestMult" />
+            <class name="homework_3.TestMult" />
         </classes>
     </test>
 </suite>
